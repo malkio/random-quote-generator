@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css">
+	<title>Random Quote Generator</title>
+	<style>
+		body{
+		  background-color: orange;
+		  padding-top:5%;
+		}
+
+		blockquote{
+		  margin: 5px 30px 5px 30px;
+		  font-size:2em;
+		}
+		blockquote footer{
+		  font-size:0.5em;
+		  margin-top:8px;
+		  text-align:right;
+		}
+
+
+
+		.panel{
+		  padding:5px;
+		  width:500px;
+		  margin: 0 auto;
+		}
+		.panel-footer {
+		  margin:20px 20px;
+		  background-color:#fff;
+		  border: none;
+		}
+
+		.btn{
+		  border-radius:0 !important;
+		  border:none;
+		  color: #fff;
+		}
+		.btn:hover, .btn:active, .btn:visited{
+		  color: #fff;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<div class="panel">
+		<blockquote class="blockquote"><span>Just another quote</span>
+			<footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+		</blockquote>
+		<div class="panel-footer clearfix">
+			<a href="#" id="tweet" class="btn btn-default"><i class="fa fa-twitter"></i> tweet</a>
+			<a href="#" id="getQuote" class="btn btn-default pull-right ">New Quote</a>
+		</div>
+	</div>
+
+
+<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+	 var quotes = [];
+	var colors = ['darksalmon','green', 'pink', 'yellow', 'black', 'olivedrab', 'lightblue', 'aqua', 'orange', 'darkslategray', 'fuchsia', 'beige', 'brown', 'burlywood', 'coral', 'cornflowerblue', 'darkgoldenrod', 'darkcyan']
+	$(document).ready(function(){
+	!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+	  $.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=20&callback=", function(a) {
+	    quotes = a;
+	    var random =  Math.floor(Math.random()*20);
+	      changeColor(random);
+	      $(".blockquote span").html(quotes[random].content);
+	      $(".blockquote footer").text(quotes[random].title);
+	});
+
+	});
+
+
+	$("#getQuote").on("click", function(){
+	  var random =  Math.floor(Math.random()*20);
+	  changeColor(random);
+	  $(".blockquote span").html(quotes[random].content);
+	  $(".blockquote footer").text(quotes[random].title);
+	});
+
+	$("#tweet").on('click', function(e){
+	  var getQuote = $("blockquote p").text()+"- "+$("blockquote footer").text();
+	  $(this).attr("href", "https://twitter.com/intent/tweet?text="+encodeURIComponent(getQuote));
+	});
+
+
+
+	function changeColor(random){
+	    $('.btn').css("background-color", colors[random]);
+	    $('body').css("background-color", colors[random]);
+	}
+
+</script>
+</body>
+</html>
