@@ -1,0 +1,18 @@
+{
+  "name": "random-quote-generator",
+  "description": "pull quote and display one by one randomly",
+  "main": "index.html",
+  "authors": [
+    "malkio <coding.malkio@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "random-quote-generator",
+  "version": "1.0.0",
+  "description": "pull quote and display one by one randomly",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "malkio <coding.malkio>",
+  "license": "ISC"
+}
